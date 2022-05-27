@@ -5,7 +5,6 @@ import inquirer
 
 sys.path.append(os.path.realpath("."))
 translator = Translator()
-text = input("Digite o texto para ser traduzido: ")
 
 list_linguas = [
             ("Português", "pt"),
@@ -14,16 +13,19 @@ list_linguas = [
             ("Francês", "fr")
         ]
 
-questions = [
-    inquirer.List(
-        "size",
-        message="Para qual língua quer traduzir o texto?",
-        choices=list_linguas,
-    ),
-]
+while True:
+    text = input("Digite o texto para ser traduzido: ")
 
-answers = inquirer.prompt(questions)
+    questions = [
+        inquirer.List(
+            "size",
+            message="Para qual língua quer traduzir o texto?",
+            choices=list_linguas,
+        ),
+    ]
 
-print('Texto traduzido: ')
-translation = translator.translate(text, dest=answers['size'])
-print(translation.text)
+    answers = inquirer.prompt(questions)
+
+    print('Texto traduzido: ')
+    translation = translator.translate(text, dest=answers['size'])
+    print(translation.text)
